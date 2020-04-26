@@ -2,11 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 
-import { RepoSearchForm } from "./features/RepoSearch/RepoSearchForm";
-import { IssuesListPage } from "./features/IssuesList/IssuesListPage";
-import { IssueDetailsPage } from "./features/IssueDetails/IssueDetailsPage";
+import { RepoSearchForm } from "./containers/RepoSearch/RepoSearchForm";
+import { IssuesListPage } from "./containers/IssuesList/IssuesListPage";
+import { IssueDetailsPage } from "./containers/IssueDetails/IssueDetailsPage";
 
-import { displayRepo, setCurrentDisplayType, setCurrentPage } from "./features/IssuesDisplay/issuesDisplay";
+import { displayRepo, setCurrentDisplayType, setCurrentPage } from "./containers/IssuesDisplay/issuesDisplay";
+
+import { CompanyFit } from "./containers/UserCompanyFit/CompanyFit";
 
 import { RootState } from "./store";
 
@@ -53,7 +55,13 @@ const App: React.FC = () => {
         );
     }
 
-    return <div className="App">{content}</div>;
+    let torreUserUi = (
+        <React.Fragment>
+            <CompanyFit data="im teling you" />
+            {content}
+        </React.Fragment>
+    );
+    return <div className="App">{torreUserUi}</div>;
 };
 
 export default App;

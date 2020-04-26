@@ -50,13 +50,11 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     box-sizing: border-box;
 }
 
-
 /* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
 /* May be able to remove this tweak as color inputs become more standardized across browsers. */
 .pure-form input[type="color"] {
     padding: 0.2em 0.5em;
 }
-
 
 .pure-form input[type="text"]:focus,
 .pure-form input[type="password"]:focus,
@@ -75,7 +73,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .pure-form select:focus,
 .pure-form textarea:focus {
     outline: 0;
-    border-color: #129FEA;
+    border-color: #129fea;
 }
 
 /*
@@ -84,14 +82,14 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 */
 .pure-form input:not([type]):focus {
     outline: 0;
-    border-color: #129FEA;
+    border-color: #129fea;
 }
 
 .pure-form input[type="file"]:focus,
 .pure-form input[type="radio"]:focus,
 .pure-form input[type="checkbox"]:focus {
-    outline: thin solid #129FEA;
-    outline: 1px auto #129FEA;
+    outline: thin solid #129fea;
+    outline: 1px auto #129fea;
 }
 .pure-form .pure-checkbox,
 .pure-form .pure-radio {
@@ -317,7 +315,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     font-size: 0.875em;
 }
 
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width: 480px) {
     .pure-form button[type="submit"] {
         margin: 0.7em 0 0;
     }
@@ -380,4 +378,10 @@ since IE8 won't execute CSS that contains a CSS3 selector.
         /* Increased bottom padding to make it group with its related input element. */
         padding: 0.2em 0 0.8em;
     }
+}
+
+.big {
+    width: 100%;
+    height: 5rem;
+    background-color: #129fea;
 }

@@ -5,7 +5,7 @@ import { IssuesPageHeader } from "./IssuesPageHeader";
 import { IssuesList } from "./IssuesList";
 import { IssuePagination, OnPageChangeCallback } from "./IssuePagination";
 
-import { fetchIssuesCount } from "features/RepoSearch/repoDetails";
+import { fetchIssuesCount } from "containers/RepoSearch/repoDetails";
 import { fetchIssues } from "./issues";
 import { RootState } from "store";
 
