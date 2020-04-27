@@ -1,7 +1,7 @@
 import React from "react";
 import { css, cx } from "emotion";
 
-import { User } from "../api/githubAPI";
+import { User } from "../../api/githubAPI";
 
 interface UserAvatarProps {
     user: User;
@@ -47,7 +47,7 @@ const horizontalStyles = css`
 export const UserWithAvatar = ({ user, orientation = "vertical", link = true }: UserAvatarProps) => {
     const classNames = cx(userStyles, {
         [verticalStyles]: orientation === "vertical",
-        [horizontalStyles]: orientation === "horizontal"
+        [horizontalStyles]: orientation === "horizontal",
     });
 
     const contents = (

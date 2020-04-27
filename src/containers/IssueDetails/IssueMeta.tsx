@@ -2,7 +2,7 @@ import React from "react";
 import { css, cx } from "emotion";
 
 import { Issue } from "../../api/githubAPI";
-import { UserWithAvatar } from "../../components/UserWithAvatar";
+import { UserWithAvatar } from "../../components/avatar/UserWithAvatar";
 
 interface IssueProps {
     issue: Issue;
@@ -24,7 +24,7 @@ const stateOpenStyles = css`
 const IssueState = ({ issue: { state } }: IssueProps) => (
     <span
         className={cx("issue-detail__state", stateStyles, {
-            [stateOpenStyles]: state === "open"
+            [stateOpenStyles]: state === "open",
         })}
     >
         {state}

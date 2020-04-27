@@ -4,7 +4,7 @@ import { css } from "emotion";
 import { Issue } from "../../api/githubAPI";
 
 import { IssueLabels } from "../../components/IssueLabels";
-import { UserWithAvatar } from "../../components/UserWithAvatar";
+import { UserWithAvatar } from "../../components/avatar/UserWithAvatar";
 
 import { shorten } from "../../utils/stringUtils";
 

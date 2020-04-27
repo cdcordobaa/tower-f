@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 
 import { insertMentionLinks } from "../../utils/stringUtils";
 import { Issue, Comment } from "../../api/githubAPI";
-import { UserWithAvatar } from "../../components/UserWithAvatar";
+import { UserWithAvatar } from "../../components/avatar/UserWithAvatar";
 
 interface ICLProps {
     issue: Issue;

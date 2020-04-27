@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
+import { CompanyFitView } from "./CompanyFitView";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./companyFitStyles.scss";
@@ -31,6 +32,7 @@ export const CompanyFit = ({ data }: Props) => {
             >
                 Fetch Data
             </button>
+            <CompanyFitView data="hey"></CompanyFitView>
         </div>
     );
 };

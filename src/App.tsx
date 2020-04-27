@@ -8,7 +8,7 @@ import { IssueDetailsPage } from "./containers/IssueDetails/IssueDetailsPage";
 
 import { displayRepo, setCurrentDisplayType, setCurrentPage } from "./containers/IssuesDisplay/issuesDisplay";
 
-import { CompanyFit } from "./containers/UserCompanyFit/CompanyFit";
+import { CompanyFit } from "./containers/UserCompanyFit/CompanyFitContainer";
 
 import { RootState } from "./store";
 
@@ -58,7 +58,7 @@ const App: React.FC = () => {
     let torreUserUi = (
         <React.Fragment>
             <CompanyFit data="im teling you" />
-            {content}
+            {/* {content} */}
         </React.Fragment>
     );
     return <div className="App">{torreUserUi}</div>;
