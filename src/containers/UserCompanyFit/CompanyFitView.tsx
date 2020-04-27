@@ -9,6 +9,7 @@ import { CompanyFit } from "./CompanyFitContainer";
 
 interface IViewProps {
     onNameSubmit: (userPublicId: string) => void;
+    calculateFitness: () => void;
     data?: string;
     idsList: [
         {
@@ -20,7 +21,7 @@ interface IViewProps {
     ];
 }
 
-export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
+export const CompanyFitView = ({ calculateFitness, onNameSubmit, idsList, data }: IViewProps) => {
     const [username, setUsername] = useState("");
 
     useEffect(() => {
@@ -37,7 +38,7 @@ export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
                         <div className="company-list-row">
                             <div className="row-block rank">
                                 <h3 className="title">Rank</h3>
-                                <h2>#{index}</h2>
+                                <h2>#{index + 1}</h2>
                             </div>
                             <div className="row-block">
                                 <h3 className="title">Company</h3>
@@ -61,32 +62,49 @@ export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
 
     return (
         <div className="company-fit">
-            <h1 className="big">this is the company fit</h1>
-            <MainCard>
-                <div className="main-header-card">
-                    <InputLabel
-                        label="Calculate The Top Companies For Your Skills"
-                        onChange={e => {
-                            console.log("changed", username);
-                            setUsername(e.target.value);
-                        }}
-                        placeholder="type username id..."
-                        negative={true}
-                        value={username}
-                    ></InputLabel>
-                    <div className="button">
-                        <MainButton
-                            callback={e => {
-                                onNameSubmit(username);
+            <div className="left-section">
+                <h1 className="big-title">this is the company fit</h1>
+                <MainCard>
+                    <div className="main-header-card">
+                        <InputLabel
+                            label="Calculate The Top Companies For Your Skills"
+                            onChange={e => {
+                                console.log("changed", username);
+                                setUsername(e.target.value);
                             }}
-                            text="GO"
+                            placeholder="type username id..."
                             negative={true}
-                        ></MainButton>
+                            value={username}
+                        ></InputLabel>
+                        <div className="button">
+                            <MainButton
+                                callback={e => {
+                                    onNameSubmit(username);
+                                }}
+                                text="GO"
+                                negative={true}
+                            ></MainButton>
+                        </div>
                     </div>
-                </div>
-            </MainCard>
+                </MainCard>
 
-            <div>{renderCompaniesList()}</div>
+                <h1>The Top 20 companies that are more relevant according your skills</h1>
+                <div>{renderCompaniesList()}</div>
+            </div>
+            <div className="right-section">
+                <div>
+                    <h1>Do you want to calculate your fitness with your company list?</h1>
+                </div>
+                <div className="button">
+                    <MainButton
+                        callback={e => {
+                            calculateFitness();
+                        }}
+                        text="Calculate My Fitness"
+                        negative={true}
+                    ></MainButton>
+                </div>
+            </div>
         </div>
     );
 };

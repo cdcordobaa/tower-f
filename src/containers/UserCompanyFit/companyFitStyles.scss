@@ -1,6 +1,9 @@
 @import "../../themes/colors.scss";
 
 .company-fit {
+    display: flex;
+    flex-direction: row;
+
     .main-header-card {
         display: flex;
         flex-direction: column;
@@ -44,6 +47,24 @@
             .title {
                 color: $color-standard;
             }
+        }
+    }
+
+    .left-section {
+        display: flex;
+        flex-direction: column;
+        flex: 3.5;
+        margin: 0 10%;
+    }
+
+    .right-section {
+        display: flex;
+        flex: 2;
+        background-color: $color-secondary-background;
+        padding: 5rem 5% 1rem 5%;
+        flex-direction: column;
+        .button {
+            align-self: center;
         }
     }
 }
