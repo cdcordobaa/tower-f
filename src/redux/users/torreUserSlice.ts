@@ -6,6 +6,7 @@ import { getUserByPublicId } from "api/torreAPI";
 import { ITorreAPIUser } from "api/types";
 import { RootState } from "store";
 import { userInitialState } from './userInitialState'
+import { appendTorreOpportList } from "../opportunities/torreOpportunitySlice"
 
 interface ITorreUserState {
     user: ITorreAPIUser;
@@ -43,6 +44,11 @@ export const fetchTorreData = (
     try {
         const torreUser = await getUserByPublicId(userPublicId);
         dispatch(getTorreDataSuccess(torreUser));
+
+        const skillsList = torreUser.strengths.map(str => str.name);
+
+        dispatch(appendTorreOpportList(skillsList));
+
     } catch (err) {
         console.error("No user calls were made");
         dispatch(getTorreDataFailed(err));

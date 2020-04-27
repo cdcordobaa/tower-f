@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./App.css";
+import "./App.scss";
 
 import { RepoSearchForm } from "./containers/RepoSearch/RepoSearchForm";
 import { IssuesListPage } from "./containers/IssuesList/IssuesListPage";

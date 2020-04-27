@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 
-import "./pure-forms.css";
-import "./pure-buttons.css";
+import "./pure-forms.scss";
+import "./pure-buttons.scss";
 
 interface Props {
     org: string;

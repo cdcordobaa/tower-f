@@ -22,7 +22,7 @@ export async function getUserByPublicId(publicId: string) {
 }
 
 export async function searchOportunitiesBySkill(skill: string) {
-    skill = 'javascript';
+
     const url = `${torreSearch}`;
     const config: AxiosRequestConfig = {
         headers: {

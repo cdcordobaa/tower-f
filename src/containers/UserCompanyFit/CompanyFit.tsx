@@ -1,11 +1,9 @@
 import React, { useState, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import "./pure-forms.css";
-import "./pure-buttons.css";
+import "./companyFitStyles.scss";
 
-import { fetchIssuesCount } from "containers/RepoSearch/repoDetails";
-import { fetchTorreData } from "./torreUserReducer";
+import { fetchTorreData } from "../../redux/users/torreUserSlice";
 
 interface Props {
     data: string;
