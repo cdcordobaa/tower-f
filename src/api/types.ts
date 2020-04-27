@@ -126,7 +126,7 @@ interface Interest {
     created: string;
 }
 
-interface Strength {
+export interface Strength {
     id: string;
     code: number;
     name: string;

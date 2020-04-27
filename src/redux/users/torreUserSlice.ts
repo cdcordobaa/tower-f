@@ -45,7 +45,7 @@ export const fetchTorreData = (
         const torreUser = await getUserByPublicId(userPublicId);
         dispatch(getTorreDataSuccess(torreUser));
 
-        const skillsList = torreUser.strengths.map(str => str.name);
+        const skillsList = torreUser.strengths.map(str => str);
 
         dispatch(appendTorreOpportList(skillsList));
 

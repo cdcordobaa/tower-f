@@ -1,1 +1,49 @@
 @import "../../themes/colors.scss";
+
+.company-fit {
+    .main-header-card {
+        display: flex;
+        flex-direction: column;
+    }
+    .button {
+        align-self: center;
+    }
+    .company-list-row {
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+        }
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-around;
+
+        .row-block {
+            text-align: center;
+            margin: 0 1.5rem;
+            font-weight: 300;
+            .title {
+                text-align: center;
+                color: $color-main-accent;
+                font-size: 1.2rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                min-height: 3.5rem;
+            }
+            h2 {
+                height: 100%;
+                text-align: center;
+            }
+        }
+        .rank {
+            min-width: 8rem;
+            border-radius: 1rem;
+            font-weight: 800;
+            background-color: $color-main-accent;
+            .title {
+                color: $color-standard;
+            }
+        }
+    }
+}

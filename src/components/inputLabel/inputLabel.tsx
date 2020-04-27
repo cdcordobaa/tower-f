@@ -3,7 +3,7 @@ import "./styles.scss";
 
 interface Props {
     label?: string;
-    onChange: (e: React.ChangeEvent) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     negative?: boolean;
     value?: string;
     placeholder?: string;

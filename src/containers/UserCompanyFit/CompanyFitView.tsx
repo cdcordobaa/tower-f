@@ -1,36 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./companyFitStyles.scss";
 
 import { MainButton } from "../../components/mainButton/mainButton";
 import { InputLabel } from "../../components/inputLabel/inputLabel";
 import { MainCard } from "../../components/mainCard/mainCard";
+import { opportunitiesIds } from "../../redux/opportunities/torreOpportunitySlice";
+import { CompanyFit } from "./CompanyFitContainer";
 
 interface IViewProps {
-    data: string;
+    onNameSubmit: (userPublicId: string) => void;
+    data?: string;
+    idsList: opportunitiesIds;
 }
 
-export const CompanyFitView = ({ data }: IViewProps) => {
+export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        console.log("hey view", idsList);
+    });
+
+    const renderCompaniesList = () => {
+        let renderList: React.ReactNodeArray = [];
+
+        Object.keys(idsList).forEach((companyId, index) => {
+            renderList.push(
+                <React.Fragment key={companyId}>
+                    <MainCard>
+                        <div className="company-list-row">
+                            <div className="row-block rank">
+                                <h3 className="title">Rank</h3>
+                                <h2>#{index}</h2>
+                            </div>
+                            <div className="row-block">
+                                <h3 className="title">Company</h3>
+                                <h2>{idsList[companyId].name}</h2>
+                            </div>
+                            <div className="row-block">
+                                <h3 className="title">Appeared in Searchs</h3>
+                                <h2>{idsList[companyId].timesInSearch} Times</h2>
+                            </div>
+                            <div className="row-block">
+                                <h3 className="title">Relevant Factor</h3>
+                                <h2>{idsList[companyId].timesInSearch}</h2>
+                            </div>
+                        </div>
+                    </MainCard>
+                </React.Fragment>
+            );
+        });
+        return renderList;
+    };
+
     return (
-        <React.Fragment>
+        <div className="company-fit">
+            <h1 className="big">this is the company fit</h1>
             <MainCard>
-                <React.Fragment>
+                <div className="main-header-card">
                     <InputLabel
-                        label="Get the top companies"
+                        label="Calculate The Top Companies For Your Skills"
                         onChange={e => {
-                            console.log("changed", e);
+                            console.log("changed", username);
+                            setUsername(e.target.value);
                         }}
                         placeholder="type username id..."
                         negative={true}
+                        value={username}
                     ></InputLabel>
-                    <MainButton
-                        callback={e => {
-                            console.log("yay here", e);
-                        }}
-                        text="Calculate"
-                        negative={true}
-                    ></MainButton>
-                </React.Fragment>
+                    <div className="button">
+                        <MainButton
+                            callback={e => {
+                                onNameSubmit(username);
+                            }}
+                            text="GO"
+                            negative={true}
+                        ></MainButton>
+                    </div>
+                </div>
             </MainCard>
-        </React.Fragment>
+
+            <div>{renderCompaniesList()}</div>
+        </div>
     );
 };
