@@ -1,4 +1,4 @@
-export interface IAPIUser {
+export interface ITorreAPIUser {
     person: Person;
     stats: Stats;
     strengths: Strength[];
@@ -122,7 +122,7 @@ interface Interest {
     id: string;
     code: number;
     name: string;
-    media: any[];
+    media: any;
     created: string;
 }
 
@@ -132,7 +132,7 @@ interface Strength {
     name: string;
     weight: number;
     recommendations: number;
-    media: any[];
+    media: any;
     created: string;
 }
 
@@ -199,3 +199,74 @@ interface Flags {
     importingLinkedinRecommendations: boolean;
     contactsImported: boolean;
 }
+
+
+export interface ITorreAPIOportunitiesSearch {
+    aggregators?: Aggregators;
+    offset?: number;
+    results: Result[];
+    size: number;
+    total: number;
+}
+
+interface Result {
+    id: string;
+    objective: string;
+    type: string;
+    organizations: Organization[];
+    locations: string[];
+    remote: boolean;
+    external: boolean;
+    deadline: string;
+    status: string;
+    compensation?: any;
+    skills: Skill[];
+    members: Member[];
+    questions: any[];
+    context: Context;
+}
+
+interface Context {
+    signaled: any[];
+}
+
+interface Member {
+    subjectId?: string | null;
+    name: string;
+    username: string;
+    professionalHeadline?: string | null;
+    picture?: string | null;
+    member: boolean;
+    manager: boolean;
+    poster: boolean;
+    weight: number;
+}
+
+interface Skill {
+    code: number;
+    name: string;
+    experience: string;
+}
+
+interface Organization {
+    id: number;
+    name: string;
+    picture?: string | null;
+}
+
+interface Aggregators {
+    remote: Remote[];
+    organization: Remote[];
+    skill: any[];
+    compensationrange: any[];
+    type: Remote[];
+    status: Remote[];
+}
+
+interface Remote {
+    total: number;
+    value: string;
+}
+
+
+

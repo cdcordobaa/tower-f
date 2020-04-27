@@ -3,46 +3,48 @@ import { ThunkAction } from "redux-thunk";
 
 import { getRepoDetails, RepoDetails } from "api/githubAPI";
 import { getUserByPublicId } from "api/torreAPI";
-import { IAPIUser } from "api/types";
+import { ITorreAPIUser } from "api/types";
 import { RootState } from "store";
+import { userInitialState } from './userInitialState'
 
-interface RepoDetailsState {
-    openIssuesCount: number;
+interface ITorreUserState {
+    user: ITorreAPIUser;
     error: Error | null;
 }
 
-const torreSlice = createSlice({
-    slice: "repoDetails",
+
+
+const torreUserSlice = createSlice({
+    slice: "torreUser",
     initialState: {
-        openIssuesCount: -1,
+        user: userInitialState,
         error: null,
-    } as RepoDetailsState,
+    } as ITorreUserState,
     reducers: {
-        getTorreDataSuccess(state, action: PayloadAction<IAPIUser>) {
-            state.openIssuesCount = 2;
+        getTorreDataSuccess(state, action: PayloadAction<ITorreAPIUser>) {
+            state.user = action.payload;
             state.error = null;
         },
         getTorreDataFailed(state, action: PayloadAction<Error>) {
-            state.openIssuesCount = -1;
+            state = state;
             state.error = action.payload;
+            console.info("redux state not modified")
         },
     },
 });
 
-export const { getTorreDataSuccess, getTorreDataFailed } = torreSlice.actions;
+export const { getTorreDataSuccess, getTorreDataFailed } = torreUserSlice.actions;
 
-export default torreSlice.reducer;
+export default torreUserSlice.reducer;
 
 export const fetchTorreData = (
     userPublicId: string,
 ): ThunkAction<void, RootState, null, Action<string>> => async dispatch => {
     try {
-        // const repoDetails = await getRepoDetails(org, repo);
-
         const torreUser = await getUserByPublicId(userPublicId);
-
         dispatch(getTorreDataSuccess(torreUser));
     } catch (err) {
+        console.error("No user calls were made");
         dispatch(getTorreDataFailed(err));
     }
 };

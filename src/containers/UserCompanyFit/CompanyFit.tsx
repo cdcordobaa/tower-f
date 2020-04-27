@@ -5,7 +5,7 @@ import "./pure-forms.css";
 import "./pure-buttons.css";
 
 import { fetchIssuesCount } from "containers/RepoSearch/repoDetails";
-import { fetchTorreData } from "./torreUser";
+import { fetchTorreData } from "./torreUserReducer";
 
 interface Props {
     data: string;
