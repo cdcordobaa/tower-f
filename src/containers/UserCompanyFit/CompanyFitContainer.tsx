@@ -22,13 +22,33 @@ export const CompanyFit = ({ data }: Props) => {
         (state: RootState) => state.issues
     );
 
-    const [currentOrg, setCurrentOrg] = useState(0);
+    const [sortedOppList, setsortedOppList] = useState([] as any);
     const [currentRepo, setCurrentRepo] = useState("me");
     const [currentPageText, setCurrentPageText] = useState("1");
 
     useEffect(() => {
-        console.log("hey", idsList, currentPageIssues);
-    }, [dispatch]);
+        console.log("hey", idsList);
+        const sortedOpportunities = Object.keys(idsList).map(elem => {
+            return {
+                id: elem,
+                timesInSearch: idsList[elem].timesInSearch,
+                name: idsList[elem].name,
+                relevance: idsList[elem].relevance,
+            };
+        });
+
+        sortedOpportunities.sort((a, b) => {
+            if (a.relevance > b.relevance) {
+                return 1;
+            }
+            if (a.relevance < b.relevance) {
+                return -1;
+            }
+            return 0;
+        });
+
+        setsortedOppList(sortedOpportunities);
+    }, [idsList]);
 
     let userId = "cristian";
 
@@ -37,5 +57,5 @@ export const CompanyFit = ({ data }: Props) => {
         dispatch(fetchTorreData(userId));
     };
 
-    return <CompanyFitView onNameSubmit={onNameSubmit} idsList={idsList}></CompanyFitView>;
+    return <CompanyFitView onNameSubmit={onNameSubmit} idsList={sortedOppList}></CompanyFitView>;
 };

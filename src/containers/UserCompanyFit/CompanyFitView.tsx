@@ -10,7 +10,14 @@ import { CompanyFit } from "./CompanyFitContainer";
 interface IViewProps {
     onNameSubmit: (userPublicId: string) => void;
     data?: string;
-    idsList: opportunitiesIds;
+    idsList: [
+        {
+            id: string;
+            timesInSearch: number;
+            name: string;
+            relevance: number;
+        }
+    ];
 }
 
 export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
@@ -23,9 +30,9 @@ export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
     const renderCompaniesList = () => {
         let renderList: React.ReactNodeArray = [];
 
-        Object.keys(idsList).forEach((companyId, index) => {
+        idsList.forEach((company, index) => {
             renderList.push(
-                <React.Fragment key={companyId}>
+                <React.Fragment key={company.id}>
                     <MainCard>
                         <div className="company-list-row">
                             <div className="row-block rank">
@@ -34,15 +41,15 @@ export const CompanyFitView = ({ onNameSubmit, idsList, data }: IViewProps) => {
                             </div>
                             <div className="row-block">
                                 <h3 className="title">Company</h3>
-                                <h2>{idsList[companyId].name}</h2>
+                                <h2>{company.name}</h2>
                             </div>
                             <div className="row-block">
                                 <h3 className="title">Appeared in Searchs</h3>
-                                <h2>{idsList[companyId].timesInSearch} Times</h2>
+                                <h2>{company.timesInSearch} Times</h2>
                             </div>
                             <div className="row-block">
                                 <h3 className="title">Relevant Factor</h3>
-                                <h2>{idsList[companyId].timesInSearch}</h2>
+                                <h2>{company.timesInSearch}</h2>
                             </div>
                         </div>
                     </MainCard>
