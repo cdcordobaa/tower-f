@@ -5,7 +5,9 @@ import { ThunkAction } from "redux-thunk";
 // import { ITorreAPIFitnessSearch } from "api/types";
 
 import { RootState } from "store";
-import { opportunitiesSearchInitialState } from "./fitnessInitialState"
+import { opportunitiesDetailsList } from "./fitnessInitialState";
+import { IOpportunitiesDetails, ITorreAPIOpportunityDetail } from "api/types";
+
 
 
 export interface opportunitiesIds {
@@ -15,15 +17,15 @@ export interface opportunitiesIds {
     }
 }
 interface ITorreFitnessState {
-    fitness: any;
+    companies: Array<ITorreAPIOpportunityDetail>;
     error: Error | null;
-    companies: any;
+    fitness: any;
 }
 
 const torreFitnessSlice = createSlice({
     slice: "fitness",
     initialState: {
-        fitness: opportunitiesSearchInitialState,
+        fitness: {},
         error: null,
         companies: {}
     } as ITorreFitnessState,

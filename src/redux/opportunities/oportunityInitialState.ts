@@ -1,7 +1,8 @@
 import { ITorreAPIOportunitiesSearch } from "api/types";
+import { IOpportunitySearchModel } from "./types"
 
 
-export const opportunitiesSearchInitialState: ITorreAPIOportunitiesSearch =
+export const opportunitiesSearchInitialState: IOpportunitySearchModel =
 {
     "aggregators": {
         "remote": [

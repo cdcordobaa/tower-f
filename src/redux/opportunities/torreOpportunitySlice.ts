@@ -5,11 +5,12 @@ import { searchOportunitiesBySkill } from "api/torreAPI";
 import { ITorreAPIOportunitiesSearch, Strength } from "api/types";
 import { RootState, store } from "store";
 import { opportunitiesSearchInitialState } from "./oportunityInitialState"
+import { IOpportunitySearchModel } from "./types"
 
 
 interface OrderOpportunitiesToListAction {
-    torreOpportunity: ITorreAPIOportunitiesSearch;
-    skillWeigth: number;
+    torreOpportunity: IOpportunitySearchModel;
+    skillWeigth: number | undefined;
 }
 
 export interface opportunitiesIds {
@@ -20,27 +21,27 @@ export interface opportunitiesIds {
     }
 }
 interface ITorreOportunitiesState {
-    oportunities: ITorreAPIOportunitiesSearch;
+    opportunities: IOpportunitySearchModel;
     error: Error | null;
     ids: opportunitiesIds;
-    sorted: Array<any>;
+}
+
+const initialState: ITorreOportunitiesState = {
+    opportunities: opportunitiesSearchInitialState,
+    error: null,
+    ids: {},
 }
 
 const torreOportunitiesSlice = createSlice({
     slice: "torreOpportunities",
-    initialState: {
-        oportunities: opportunitiesSearchInitialState,
-        error: null,
-        ids: {},
-        sorted: []
-    } as ITorreOportunitiesState,
+    initialState: initialState,
     reducers: {
-        searchOpportunitiesSuccess(state, action: PayloadAction<ITorreAPIOportunitiesSearch>) {
-            state.oportunities = action.payload
+        searchOpportunitiesSuccess(state, action: PayloadAction<IOpportunitySearchModel>) {
+            state.opportunities = action.payload
             state.error = null;
         },
         appendOpportunitiesToList(state, action: PayloadAction<OrderOpportunitiesToListAction>) {
-            let opportList = state.oportunities.results
+            let opportList = state.opportunities.results
 
             action.payload.torreOpportunity.results.forEach(opportunity => {
                 if (!state.ids[opportunity.id]) {
@@ -48,16 +49,16 @@ const torreOportunitiesSlice = createSlice({
                     state.ids[opportunity.id] = {
                         timesInSearch: 1,
                         name: opportunity.organizations[0] ? opportunity.organizations[0].name : 'none?',
-                        relevance: 1 + 1 * action.payload.skillWeigth,
+                        relevance: 1 + 1 * <number>action.payload.skillWeigth,
                     }
 
                 } else {
                     state.ids[opportunity.id].timesInSearch += 1;
-                    state.ids[opportunity.id].relevance = 1 + 1 * action.payload.skillWeigth;
+                    state.ids[opportunity.id].relevance = 1 + 1 * <number>action.payload.skillWeigth;
                 }
             })
 
-            state.oportunities.results = opportList;
+            state.opportunities.results = opportList;
             state.error = null;
 
         },

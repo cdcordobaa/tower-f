@@ -1,6 +1,8 @@
 
 import axios, { AxiosRequestConfig, AxiosPromise } from "axios";
 import { ITorreAPIUser, ITorreAPIOportunitiesSearch } from './types'
+import { IOpportunitySearchModel } from "../redux/opportunities/types"
+
 
 const torreBios = 'https://torre.bio/api/bios/';
 const torreSearch = 'https://search.torre.co/opportunities/_search/'
@@ -44,7 +46,7 @@ export async function searchOportunitiesBySkill(skill: string) {
         }
     };
 
-    let response = await axios.post<ITorreAPIOportunitiesSearch>(url, data, config);
+    let response = await axios.post<IOpportunitySearchModel>(url, data, config);
     console.log(`Get opportunities by skill ${skill} from axios: ", ${(await response).data}`);
     return (await response).data;
 }

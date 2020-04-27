@@ -13,8 +13,6 @@ interface ITorreUserState {
     error: Error | null;
 }
 
-
-
 const torreUserSlice = createSlice({
     slice: "torreUser",
     initialState: {

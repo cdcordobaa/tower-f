@@ -33,8 +33,9 @@ interface Group {
 }
 
 interface Language {
-    code: string;
-    language: string;
+    code?: string;
+    language: string | Country;
+    fluency?: string;
 }
 
 interface Opportunity {
@@ -130,10 +131,11 @@ export interface Strength {
     id: string;
     code: number;
     name: string;
-    weight: number;
-    recommendations: number;
-    media: any;
-    created: string;
+    weight?: number;
+    recommendations?: number;
+    media?: any;
+    created?: string;
+    experience?: string;
 }
 
 interface Stats {
@@ -144,34 +146,38 @@ interface Stats {
 }
 
 interface Person {
-    professionalHeadline: string;
-    completion: number;
-    showPhone: boolean;
-    created: string;
-    verified: boolean;
-    flags: Flags;
-    weight: number;
-    locale: string;
-    subjectId: string;
-    picture: string;
-    hasEmail: boolean;
-    name: string;
-    links: Link[];
-    location: Location;
-    theme: string;
+    professionalHeadline?: string;
+    completion?: number;
+    showPhone?: boolean;
+    created?: string;
+    verified?: boolean;
+    flags?: Flags;
+    weight?: number;
+    locale?: string;
+    subjectId?: string | number;
+    picture?: string;
+    hasEmail?: boolean;
+    name?: string;
+    links?: Link[];
+    location?: Location;
+    theme?: string;
     id: string;
-    pictureThumbnail: string;
-    claimant: boolean;
-    weightGraph: string;
-    publicId: string;
+    pictureThumbnail?: string;
+    claimant?: boolean;
+    weightGraph?: string;
+    publicId?: string;
+    username?: string;
+    hasBio?: boolean;
+    bioCompletion?: number;
 }
 
 interface Location {
-    name: string;
+    id?: string;
+    name?: string;
     latitude: number;
     longitude: number;
-    timezone: string;
-    timezoneOffSet: number;
+    timezone?: string;
+    timezoneOffSet?: number;
 }
 
 interface Link {
@@ -202,7 +208,7 @@ interface Flags {
 
 
 export interface ITorreAPIOportunitiesSearch {
-    aggregators?: Aggregators;
+    aggregators?: Aggregators | null;
     offset?: number;
     results: Result[];
     size: number;
@@ -230,17 +236,17 @@ interface Context {
     signaled: any[];
 }
 
-interface Member {
-    subjectId?: string | null;
-    name: string;
-    username: string;
-    professionalHeadline?: string | null;
-    picture?: string | null;
-    member: boolean;
-    manager: boolean;
-    poster: boolean;
-    weight: number;
-}
+// interface Member {
+//     subjectId?: string | null;
+//     name: string;
+//     username: string;
+//     professionalHeadline?: string | null;
+//     picture?: string | null;
+//     member?: boolean;
+//     manager?: boolean;
+//     poster: boolean;
+//     weight: number;
+// }
 
 interface Skill {
     code: number;
@@ -252,6 +258,7 @@ interface Organization {
     id: number;
     name: string;
     picture?: string | null;
+    size?: number;
 }
 
 interface Aggregators {
@@ -269,4 +276,161 @@ interface Remote {
 }
 
 
+export interface IOpportunitiesDetails {
+    opportunitiesDetails: Array<ITorreAPIOpportunityDetail>;
+}
+export interface ITorreAPIOpportunityDetail {
+    residency: Residency;
+    attachments: Attachment[];
+    boardVersion: number;
+    prefilledStatus: string;
+    locale: string;
+    objective: string;
+    review: string;
+    draft?: any;
+    members: Member[];
+    details: Detail[];
+    id: string;
+    place: Place;
+    deadline: string;
+    slug: string;
+    owner: Owner;
+    completion: number;
+    agreement: Agreement;
+    languages: Language[];
+    created: string;
+    opportunity: string;
+    active: boolean;
+    commitment: Commitment;
+    stableOn: string;
+    timezones: string[];
+    strengths: Strength[];
+    organizations: Organization[];
+    compensation: Compensation;
+    openGraph: string;
+    status: string;
+    size?: number;
+}
 
+interface Compensation {
+    code: string;
+    currency: string;
+    minAmount: number;
+    maxAmount: number;
+    periodicity: string;
+    visible: boolean;
+}
+
+// interface Organization {
+//     id: number;
+//     name: string;
+//     size: number;
+//     picture: string;
+// }
+
+// interface Strength {
+//     id: string;
+//     code: number;
+//     name: string;
+//     experience: string;
+// }
+
+interface Commitment {
+    code: string;
+    hours: number;
+}
+
+// interface Language {
+//     language: Country;
+//     fluency: string;
+// }
+
+interface Agreement {
+    type: string;
+}
+
+interface Owner {
+    id: string;
+    username: string;
+    name: string;
+    hasEmail: boolean;
+    professionalHeadline: string;
+    picture: string;
+    pictureThumbnail: string;
+    hasBio: boolean;
+    bioCompletion: number;
+    weight: number;
+    verified: boolean;
+    subjectId: number;
+}
+
+interface Place {
+    remote: boolean;
+    anywhere: boolean;
+    location: Location[];
+}
+
+// interface Location {
+//     id: string;
+//     latitude: number;
+//     longitude: number;
+// }
+
+interface Detail {
+    code: string;
+    content: string;
+}
+
+interface Member {
+    id?: string;
+    person?: Person;
+    manager?: boolean;
+    poster?: boolean;
+    member?: boolean;
+    status?: string;
+    visible?: boolean;
+    subjectId?: string | null;
+    name?: string;
+    username?: string;
+    professionalHeadline?: string | null;
+    picture?: string | null;
+    weight?: number;
+
+}
+
+// interface Person {
+//     id: string;
+//     username: string;
+//     name: string;
+//     hasEmail: boolean;
+//     hasBio: boolean;
+//     bioCompletion: number;
+//     weight: number;
+//     verified: boolean;
+//     professionalHeadline: string;
+//     picture: string;
+//     pictureThumbnail?: string;
+//     subjectId?: number;
+// }
+
+interface Attachment {
+    resource: string;
+    address: string;
+    path: string;
+    caption: string;
+}
+
+interface Residency {
+    anywhere: boolean;
+    countries: Country2[];
+}
+
+interface Country2 {
+    country: Country;
+    sponsorVisa: string;
+}
+
+interface Country {
+    code: string;
+    name: string;
+}
