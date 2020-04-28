@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import "./companyFitStyles.scss";
 
 import { fetchTorreData } from "../../redux/users/torreUserSlice";
+import { fecthOpportunitiesDetailsByIds, calculateCulturalFit } from "../../redux/fitness/torreFitnessSlice";
 import { opportunitiesIds } from "../../redux/opportunities/torreOpportunitySlice";
 
 import { RootState } from "store";
+import { ITorreAPIUser } from "api/types";
 
 interface Props {
     data: string;
@@ -17,19 +19,20 @@ export const CompanyFit = ({ data }: Props) => {
     const dispatch = useDispatch();
 
     const idsList: opportunitiesIds = useSelector((state: RootState) => state.opportunities.ids);
+    const torreUser: ITorreAPIUser = useSelector((state: RootState) => state.torreUser.user);
+    const fitness = useSelector((state: RootState) => state.fitness);
 
     const { currentPageIssues, isLoading, error: issuesError, issuesByNumber, pageCount } = useSelector(
         (state: RootState) => state.issues
     );
 
     const [sortedOppList, setsortedOppList] = useState([] as any);
-    const [currentRepo, setCurrentRepo] = useState("me");
-    const [currentPageText, setCurrentPageText] = useState("1");
+
+    const sortBy = "timesInSearch";
 
     const companiesTopLength = 20;
 
     useEffect(() => {
-        console.log("hey", idsList);
         const sortedOpportunities = Object.keys(idsList).map(elem => {
             return {
                 id: elem,
@@ -39,10 +42,10 @@ export const CompanyFit = ({ data }: Props) => {
             };
         });
         sortedOpportunities.sort((a, b) => {
-            if (a.relevance > b.relevance) {
+            if (a[sortBy] > b[sortBy]) {
                 return 1;
             }
-            if (a.relevance < b.relevance) {
+            if (a[sortBy] < b[sortBy]) {
                 return -1;
             }
             return 0;
@@ -55,21 +58,28 @@ export const CompanyFit = ({ data }: Props) => {
         );
     }, [idsList]);
 
-    let userId = "cristian";
+    useEffect(() => {
+        console.log("fitness");
+    }, [fitness]);
 
     const onNameSubmit = (userPublicId: string) => {
         console.log("on Name", userPublicId);
-        dispatch(fetchTorreData(userId));
+        dispatch(fetchTorreData(userPublicId));
     };
 
-    const calculateFitness = () => {
+    const calculateFitness = async () => {
         console.log("calculate");
+        let oppIds = sortedOppList.map((elem: any) => elem.id);
+        await dispatch(fecthOpportunitiesDetailsByIds(oppIds));
+        await dispatch(calculateCulturalFit(torreUser));
     };
 
     return (
         <CompanyFitView
             calculateFitness={calculateFitness}
             onNameSubmit={onNameSubmit}
+            user={torreUser}
+            fitness={fitness}
             idsList={sortedOppList}
         ></CompanyFitView>
     );

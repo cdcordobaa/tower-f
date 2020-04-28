@@ -94,9 +94,6 @@ export const appendTorreOpportList = (
     try {
 
         skillList.forEach(async (skill, index) => {
-            if (index > 3) {
-                return;
-            }
             const torreOpportunity = await searchOportunitiesBySkill(skill.name);
             dispatch(appendOpportunitiesToList({ torreOpportunity: torreOpportunity, skillWeigth: skill.weight }));
         })

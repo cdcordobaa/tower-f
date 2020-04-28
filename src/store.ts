@@ -6,6 +6,7 @@ import issuesReducer from "./containers/IssuesList/issues";
 import commentsReducer from "./containers/IssueDetails/comments";
 import torreUserReducer from "./redux/users/torreUserSlice"
 import torreOpportunityReducer from './redux/opportunities/torreOpportunitySlice'
+import torreFitnessSlice from "./redux/fitness/torreFitnessSlice"
 export const store = configureStore({
     reducer: {
         repoDetails: repoDetailsReducer,
@@ -14,6 +15,7 @@ export const store = configureStore({
         comments: commentsReducer,
         torreUser: torreUserReducer,
         opportunities: torreOpportunityReducer,
+        fitness: torreFitnessSlice,
     },
 });
 

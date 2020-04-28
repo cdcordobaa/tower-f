@@ -1,4 +1,4 @@
-import { IOpportunitiesDetails, ITorreAPIOpportunityDetail } from "api/types";
+import { ITorreAPIOpportunityDetail } from "api/types";
 
 
 export const opportunitiesDetailsList: Array<ITorreAPIOpportunityDetail> =

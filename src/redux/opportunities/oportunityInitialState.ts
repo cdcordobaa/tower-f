@@ -1,4 +1,3 @@
-import { ITorreAPIOportunitiesSearch } from "api/types";
 import { IOpportunitySearchModel } from "./types"
 
 

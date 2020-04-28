@@ -4,7 +4,10 @@ import { css, cx } from "emotion";
 import { User } from "../../api/githubAPI";
 
 interface UserAvatarProps {
-    user: User;
+    user: {
+        avatar_url: string;
+        login?: string;
+    };
     orientation?: "vertical" | "horizontal";
     link?: boolean;
 }
@@ -14,8 +17,8 @@ const userStyles = css`
     align-items: center;
 
     .issue__user__avatar {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     }

@@ -66,5 +66,62 @@
         .button {
             align-self: center;
         }
+
+        .fit-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .fit-info {
+            h3 {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
+        }
+
+        .fit-level-title {
+            font: 0.3rem;
+            font-weight: 500;
+            color: $color-main-accent;
+        }
+
+        .fit-roles {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            font-size: 0.7rem;
+            h1 {
+                font-size: 0.9rem;
+                margin: 0.1rem 0;
+                font-weight: bold;
+                margin: 0 0.3rem;
+            }
+            h3 {
+                margin: 0.1rem 0;
+            }
+        }
+    }
+
+    .fitness-container {
+        border-radius: 1rem;
+        border-width: 0.2rem;
+        border: 1px solid $color-main-accent;
+        margin: 0.3rem 0;
+        padding: 0.2rem 0.8rem;
+    }
+
+    .user-info {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h1 {
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+        }
     }
 }
