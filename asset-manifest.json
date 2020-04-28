@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tower-f/static/css/main.c48c4137.chunk.css",
+    "main.js": "/tower-f/static/js/main.ec1f0b64.chunk.js",
+    "main.js.map": "/tower-f/static/js/main.ec1f0b64.chunk.js.map",
+    "runtime~main.js": "/tower-f/static/js/runtime~main.10e61bf2.js",
+    "runtime~main.js.map": "/tower-f/static/js/runtime~main.10e61bf2.js.map",
+    "static/js/2.c0ed4786.chunk.js": "/tower-f/static/js/2.c0ed4786.chunk.js",
+    "static/js/2.c0ed4786.chunk.js.map": "/tower-f/static/js/2.c0ed4786.chunk.js.map",
+    "index.html": "/tower-f/index.html",
+    "precache-manifest.7c94f4a25e2212c45abbead29b20c2fa.js": "/tower-f/precache-manifest.7c94f4a25e2212c45abbead29b20c2fa.js",
+    "service-worker.js": "/tower-f/service-worker.js",
+    "static/css/main.c48c4137.chunk.css.map": "/tower-f/static/css/main.c48c4137.chunk.css.map"
+  }
+}
