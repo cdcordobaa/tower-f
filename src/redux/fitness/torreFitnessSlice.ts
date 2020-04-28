@@ -38,7 +38,7 @@ const torreFitnessSlice = createSlice({
         getOpportDetailsSuccess(state, action: PayloadAction<ITorreAPIOpportunityDetail>) {
             console.log("success")
             let list = state.companies.push(action.payload);
-            // state.companies = list;
+            state.error = null;
         },
         getOpportDetailsFailed(state, action: PayloadAction<Error>) {
             state.error = action.payload;
@@ -69,6 +69,7 @@ const torreFitnessSlice = createSlice({
             })
 
             state.fitness = fitness;
+            state.error = null;
         },
     },
 });

@@ -26,10 +26,6 @@ interface IViewProps {
 export const CompanyFitView = ({ user, fitness, calculateFitness, onNameSubmit, idsList, data }: IViewProps) => {
     const [username, setUsername] = useState("");
 
-    useEffect(() => {
-        console.log("hey view", idsList);
-    });
-
     const renderCompaniesList = () => {
         let renderList: React.ReactNodeArray = [];
 
@@ -104,49 +100,53 @@ export const CompanyFitView = ({ user, fitness, calculateFitness, onNameSubmit, 
 
     return (
         <div className="company-fit">
-            <div className="left-section">
-                <h1 className="big-title">
-                    This App allows you to calculate the level of fitness between you and a potential opportunity -
-                    <strong> powered by TORRE data </strong>
-                </h1>
-                <MainCard>
-                    <React.Fragment>
-                        <h4 className="muted -ext">
-                            Write down you public user id from torre. I.e : cristiandanielcordobaaguirre
-                        </h4>
-                        <div className="main-header-card">
-                            <InputLabel
-                                label="Calculate The Top Companies For Your Skills"
-                                onChange={e => {
-                                    console.log("changed", username);
-                                    setUsername(e.target.value);
-                                }}
-                                placeholder="type username id..."
-                                negative={true}
-                                value={username}
-                            ></InputLabel>
-                            <div className="button">
-                                <MainButton
-                                    callback={e => {
-                                        onNameSubmit(username);
+            <div className="scroller">
+                <div className="left-section">
+                    <h1 className="big-title">
+                        This App allows you to calculate the level of fitness between you and a potential opportunity -
+                        <strong> powered by TORRE data </strong>
+                    </h1>
+                    <MainCard>
+                        <React.Fragment>
+                            <h4 className="muted -ext">
+                                Write down you public user id from torre. I.e : cristiandanielcordobaaguirre
+                            </h4>
+                            <div className="main-header-card">
+                                <InputLabel
+                                    label="Calculate The Top Companies For Your Skills"
+                                    onChange={e => {
+                                        console.log("changed", username);
+                                        setUsername(e.target.value);
                                     }}
-                                    text="GO"
+                                    placeholder="type username id..."
                                     negative={true}
-                                ></MainButton>
+                                    value={username}
+                                ></InputLabel>
+                                <div className="button">
+                                    <MainButton
+                                        callback={e => {
+                                            onNameSubmit(username);
+                                        }}
+                                        text="GO"
+                                        negative={true}
+                                    ></MainButton>
+                                </div>
                             </div>
-                        </div>
-                        {user && user.person && (
-                            <div className="user-info">
-                                <UserWithAvatar user={{ avatar_url: user.person.picture ? user.person.picture : "" }} />
-                                <h1>{user.person.name}</h1>
-                                <h1>{user.person.professionalHeadline}</h1>
-                            </div>
-                        )}
-                    </React.Fragment>
-                </MainCard>
+                            {user && user.person && (
+                                <div className="user-info">
+                                    <UserWithAvatar
+                                        user={{ avatar_url: user.person.picture ? user.person.picture : "" }}
+                                    />
+                                    <h1>{user.person.name}</h1>
+                                    <h1>{user.person.professionalHeadline}</h1>
+                                </div>
+                            )}
+                        </React.Fragment>
+                    </MainCard>
 
-                <h1>The Top 20 companies that are more relevant according your skills</h1>
-                <div>{renderCompaniesList()}</div>
+                    <h1>The Top 20 companies that are more relevant according your skills</h1>
+                    <div>{renderCompaniesList()}</div>
+                </div>
             </div>
             <div className="right-section">
                 <div>

@@ -18,15 +18,33 @@ interface Props {
 export const CompanyFit = ({ data }: Props) => {
     const dispatch = useDispatch();
 
-    const idsList: opportunitiesIds = useSelector((state: RootState) => state.opportunities.ids);
-    const torreUser: ITorreAPIUser = useSelector((state: RootState) => state.torreUser.user);
-    const fitness = useSelector((state: RootState) => state.fitness);
+    let idsList: opportunitiesIds = useSelector((state: RootState) => state.opportunities.ids);
+    let torreUser: ITorreAPIUser = useSelector((state: RootState) => state.torreUser.user);
+    let fitness = useSelector((state: RootState) => state.fitness);
+
+    const fitnessError = useSelector((state: RootState) => state.fitness.error);
+    const idsListError = useSelector((state: RootState) => state.opportunities.error);
+    const torreUserError = useSelector((state: RootState) => state.torreUser.error);
 
     const [sortedOppList, setsortedOppList] = useState([] as any);
+    const [fitnessObj, setFitnessObj] = useState({} as any);
+    const [torreUsr, setTorreUsr] = useState({} as any);
 
     const sortBy = "timesInSearch";
 
     const companiesTopLength = 20;
+
+    useEffect(() => {
+        dispatch(fetchTorreData(" "));
+    }, []);
+
+    useEffect(() => {
+        if (fitnessError !== null || idsListError !== null || torreUserError !== null) {
+            setTorreUsr({});
+            setFitnessObj({});
+            setsortedOppList([]);
+        }
+    }, [fitnessError, idsListError, torreUserError]);
 
     useEffect(() => {
         const sortedOpportunities = Object.keys(idsList).map(elem => {
@@ -38,14 +56,16 @@ export const CompanyFit = ({ data }: Props) => {
             };
         });
         sortedOpportunities.sort((a, b) => {
-            if (a[sortBy] > b[sortBy]) {
+            if (a.timesInSearch < b.timesInSearch) {
                 return 1;
             }
-            if (a[sortBy] < b[sortBy]) {
+            if (a.timesInSearch > b.timesInSearch) {
                 return -1;
             }
             return 0;
         });
+        console.log("ids length", sortedOpportunities.length);
+        console.log("max value", sortedOpportunities[0], sortedOpportunities[sortedOpportunities.length - 1]);
         setsortedOppList(
             sortedOpportunities.slice(
                 0,
@@ -55,8 +75,9 @@ export const CompanyFit = ({ data }: Props) => {
     }, [idsList]);
 
     useEffect(() => {
-        console.log("fitness");
-    }, [fitness]);
+        setFitnessObj(fitness);
+        setTorreUsr(torreUser);
+    }, [fitness, torreUser]);
 
     const onNameSubmit = (userPublicId: string) => {
         console.log("on Name", userPublicId);
@@ -74,8 +95,8 @@ export const CompanyFit = ({ data }: Props) => {
         <CompanyFitView
             calculateFitness={calculateFitness}
             onNameSubmit={onNameSubmit}
-            user={torreUser}
-            fitness={fitness}
+            user={torreUsr}
+            fitness={fitnessObj}
             idsList={sortedOppList}
         ></CompanyFitView>
     );

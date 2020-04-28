@@ -24,7 +24,7 @@ const torreUserSlice = createSlice({
             state.error = null;
         },
         getTorreDataFailed(state, action: PayloadAction<Error>) {
-            state = state;
+            state.user = {} as ITorreAPIUser;
             state.error = action.payload;
             console.info("redux state not modified")
         },

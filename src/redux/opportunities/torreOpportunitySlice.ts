@@ -40,10 +40,19 @@ const torreOportunitiesSlice = createSlice({
             state.opportunities = action.payload
             state.error = null;
         },
+        emptyState(state) {
+            state.ids = {} as opportunitiesIds;
+            state.opportunities = initialState.opportunities as IOpportunitySearchModel
+            state.error = null;
+        },
         appendOpportunitiesToList(state, action: PayloadAction<OrderOpportunitiesToListAction>) {
             let opportList = state.opportunities.results
 
             action.payload.torreOpportunity.results.forEach(opportunity => {
+                if (!opportunity.organizations[0] || !opportunity.organizations[0].name) {
+                    return;
+                }
+
                 if (!state.ids[opportunity.id]) {
                     opportList.push(opportunity)
                     state.ids[opportunity.id] = {
@@ -70,7 +79,7 @@ const torreOportunitiesSlice = createSlice({
     },
 });
 
-export const { searchOpportunitiesSuccess, searchOpportunitiesFailed, appendOpportunitiesToList } = torreOportunitiesSlice.actions;
+export const { searchOpportunitiesSuccess, searchOpportunitiesFailed, appendOpportunitiesToList, emptyState } = torreOportunitiesSlice.actions;
 
 export default torreOportunitiesSlice.reducer;
 
@@ -92,6 +101,8 @@ export const appendTorreOpportList = (
     skillList: Strength[],
 ): ThunkAction<void, RootState, null, Action<string>> => async dispatch => {
     try {
+
+        await dispatch(emptyState());
 
         skillList.forEach(async (skill, index) => {
             const torreOpportunity = await searchOportunitiesBySkill(skill.name);
