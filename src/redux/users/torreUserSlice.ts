@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, Action } from "redux-starter-kit";
 import { ThunkAction } from "redux-thunk";
 
-import { getRepoDetails, RepoDetails } from "api/githubAPI";
 import { getUserByPublicId } from "api/torreAPI";
 import { ITorreAPIUser } from "api/types";
 import { RootState } from "store";

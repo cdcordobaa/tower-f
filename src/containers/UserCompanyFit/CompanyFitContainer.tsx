@@ -22,10 +22,6 @@ export const CompanyFit = ({ data }: Props) => {
     const torreUser: ITorreAPIUser = useSelector((state: RootState) => state.torreUser.user);
     const fitness = useSelector((state: RootState) => state.fitness);
 
-    const { currentPageIssues, isLoading, error: issuesError, issuesByNumber, pageCount } = useSelector(
-        (state: RootState) => state.issues
-    );
-
     const [sortedOppList, setsortedOppList] = useState([] as any);
 
     const sortBy = "timesInSearch";
